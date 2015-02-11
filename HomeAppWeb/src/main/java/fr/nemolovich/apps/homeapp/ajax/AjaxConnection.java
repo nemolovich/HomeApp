@@ -6,14 +6,17 @@
 package fr.nemolovich.apps.homeapp.ajax;
 
 import fr.nemolovich.apps.homeapp.route.pages.CameraPage;
-import fr.nemolovich.apps.nemolight.config.route.RouteElement;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
+import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
+
 import java.io.IOException;
 import java.util.regex.Matcher;
+
 import org.json.JSONObject;
+
 import spark.Request;
 import spark.Response;
 
@@ -35,7 +38,6 @@ public class AjaxConnection extends WebRouteServlet {
 	@Override
 	protected void doGet(Request request, Response response, SimpleHash root)
 		throws TemplateException, IOException {
-		System.out.println("GET!");
 	}
 
 	@Override

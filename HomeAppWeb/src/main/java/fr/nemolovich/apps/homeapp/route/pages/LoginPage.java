@@ -5,9 +5,9 @@
  */
 package fr.nemolovich.apps.homeapp.route.pages;
 
-import fr.nemolovich.apps.nemolight.config.route.RouteElement;
 import fr.nemolovich.apps.nemolight.constants.NemoLightConstants;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
+import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import fr.nemolovich.apps.nemolight.security.GlobalSecurity;
 import fr.nemolovich.apps.nemolight.security.SecurityConfiguration;
 import fr.nemolovich.apps.nemolight.security.SecurityUtils;
@@ -15,7 +15,9 @@ import fr.nemolovich.apps.nemolight.security.User;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
+
 import java.io.IOException;
+
 import spark.Request;
 import spark.Response;
 import spark.Session;

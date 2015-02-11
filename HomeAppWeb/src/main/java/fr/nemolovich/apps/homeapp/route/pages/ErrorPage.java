@@ -5,12 +5,14 @@
  */
 package fr.nemolovich.apps.homeapp.route.pages;
 
-import fr.nemolovich.apps.nemolight.config.route.RouteElement;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
+import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
+
 import java.io.IOException;
+
 import spark.Request;
 import spark.Response;
 
