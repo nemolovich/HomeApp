@@ -7,7 +7,6 @@ package fr.nemolovich.apps.homeapp.ajax;
 
 import fr.nemolovich.apps.homeapp.route.pages.CameraPage;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
-import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
@@ -24,7 +23,7 @@ import spark.Response;
  *
  * @author Nemolovich
  */
-@RouteElement(path = "/ajax", page = "ajax.tpl")
+//@RouteElement(path = "/ajax", page = "ajax.tpl")
 public class AjaxConnection extends WebRouteServlet {
 
 	private static final String BEAN_KEY = "action";
