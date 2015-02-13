@@ -16,8 +16,9 @@ function request(bean, value) {
 		type: 'POST',
 		url: url,
 		data: {
-			bean: bean,
-			value: value
+			bean:	bean,
+			uid:	uuid,
+			value:	value
 		},
 		success: function (response) {
 			console.log('Success: ' + response);

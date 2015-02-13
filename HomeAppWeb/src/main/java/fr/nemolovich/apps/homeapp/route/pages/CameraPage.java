@@ -5,6 +5,7 @@
  */
 package fr.nemolovich.apps.homeapp.route.pages;
 
+import fr.nemolovich.apps.nemolight.constants.NemoLightConstants;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
 import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import freemarker.template.Configuration;
@@ -14,6 +15,8 @@ import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.json.JSONObject;
 
 import spark.Request;
 import spark.Response;
@@ -30,10 +33,10 @@ public class CameraPage extends WebRouteServlet {
 	private final String cameraProtocol;
 
 	public static final Pattern CAMERA_DIMENSION = Pattern
-		.compile("^(?<width>\\d{2,4})x(?<height>\\d{2,4})$");
+			.compile("^(?<width>\\d{2,4})x(?<height>\\d{2,4})$");
 
 	public CameraPage(String path, String templateName, Configuration config)
-		throws IOException {
+			throws IOException {
 		super(path, templateName, config);
 		this.cameraServer = "localhost";
 		this.cameraPort = 5000;
@@ -42,7 +45,7 @@ public class CameraPage extends WebRouteServlet {
 
 	@Override
 	protected void doGet(Request request, Response response, SimpleHash root)
-		throws TemplateException, IOException {
+			throws TemplateException, IOException {
 		String size = request.params("size");
 
 		Matcher matcher = CAMERA_DIMENSION.matcher(size);
@@ -65,7 +68,18 @@ public class CameraPage extends WebRouteServlet {
 
 	@Override
 	protected void doPost(Request request, Response response, SimpleHash root)
-		throws TemplateException, IOException {
+			throws TemplateException, IOException {
 	}
 
+	@Override
+	public void getAjaxRequest(String request, SimpleHash root) {
+		System.out.println("Request: " + request);
+		JSONObject result = new JSONObject();
+
+		result.put("result",
+				String.format("Got request: '%s'", request));
+
+		root.put(NemoLightConstants.AJAX_BEAN_KEY, this.getName());
+		root.put(NemoLightConstants.AJAX_VALUE_KEY, result);
+	}
 }
