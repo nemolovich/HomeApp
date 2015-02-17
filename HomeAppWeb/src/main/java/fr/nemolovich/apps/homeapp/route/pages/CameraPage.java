@@ -87,14 +87,7 @@ public class CameraPage extends WebRouteServlet {
     }
 
     @Override
-    public void getAjaxRequest(String request, SimpleHash root) {
-        System.out.println("Request: " + request);
-        JSONObject result = new JSONObject();
-
-        result.put("result",
-            String.format("Got request: '%s'", request));
-
-        root.put(NemoLightConstants.AJAX_BEAN_KEY, this.getName());
-        root.put(NemoLightConstants.AJAX_VALUE_KEY, result);
+    public void getAjaxRequest(JSONObject request, SimpleHash root) {
+    	super.getAjaxRequest(request, root);
     }
 }

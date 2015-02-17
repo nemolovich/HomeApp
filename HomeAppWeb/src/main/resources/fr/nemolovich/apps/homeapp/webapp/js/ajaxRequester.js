@@ -18,7 +18,7 @@ function request(bean, value) {
 		data: {
 			bean:	bean,
 			uid:	uuid,
-			value:	value
+			value:	JSON.stringify(value)
 		},
 		success: function (response) {
 			console.log('Success: ' + response);

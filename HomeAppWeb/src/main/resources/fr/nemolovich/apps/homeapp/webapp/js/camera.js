@@ -17,5 +17,8 @@ function updateSize(json) {
 function requestSize() {
     var width = $('#width_input').val();
     var height = $('#height_input').val();
-    request("CameraPage", width + 'x' + height);
+    var req = new Object();
+    req.width = width;
+    req.height = height;
+    request("CameraPage", req);
 }
