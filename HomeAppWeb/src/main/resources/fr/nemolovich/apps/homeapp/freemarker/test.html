@@ -1,0 +1,29 @@
+<#import "templates/master.html" as layout />
+
+<@layout.master title="Test page">
+
+<form action="#">
+	<table>
+		<tr>
+			<td>
+				<input id="field1_ajax_input" type="text" />
+			</td>
+			<td>
+				<span id="field1">${field1}</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input id="field2_ajax_input" type="text" />
+			</td>
+			<td>
+				<span id="field2">${field1}</span>
+			</td>
+	</table>
+	<input type="submit" class="ui-button" value="Submit"
+		   onclick="javascript:request(bean, fields);"/>
+</form>
+
+</body>
+</html>
+</@layout.master>

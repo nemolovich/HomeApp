@@ -1,24 +1,18 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-function request(bean, value) {
+function request(bean, fields, callback) {
 	if (!beanExists(bean)) {
 		console.error("The bean '" + bean + "' does not exist!");
 		return;
 	}
+	var value = getAjaxValues(fields);
 	var uuid = generateUUID();
 	var url = "/ajax/" + uuid;
-	var fun = getAjaxFunction(bean);
 	return $.ajax({
 		type: 'POST',
 		url: url,
 		data: {
-			bean:	bean,
-			uid:	uuid,
-			value:	JSON.stringify(value)
+			bean: bean,
+			uid: uuid,
+			value: JSON.stringify(value)
 		},
 		success: function (response) {
 			console.log('Success: ' + response);
@@ -26,10 +20,14 @@ function request(bean, value) {
 				var r = response.replace(/\n/g, '').replace(/\r/g, '')
 						.replace(/\/\*{2}.*\*\//, '');
 				var resp = JSON.parse(r);
-				console.log(resp);
-				fun(resp.value);
+				if (resp.action === 'update') {
+					updateFields(resp.value);
+				}
+				if (callback !== undefined) {
+					callback();
+				}
 			} catch (e) {
-				console.error("Can not parse result!");
+				console.error("Can not parse result: " + e);
 			}
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
@@ -38,6 +36,18 @@ function request(bean, value) {
 			console.error(thrownError);
 		}
 	});
+}
+
+function getAjaxValues(fields) {
+	var result = new Object();
+	for (i = 0; i < fields.length; i++) {
+		var value = document.getElementById(fields[i] +
+				"_ajax_input");
+		if (value !== null) {
+			result[fields[i]] = value.value;
+		}
+	}
+	return result;
 }
 
 function generateUUID() {
@@ -50,11 +60,15 @@ function generateUUID() {
 	return uuid;
 }
 
-function getAjaxFunction(bean) {
-	/*
-	 * TODO: Search in map
-	 */
-	return log;
+function updateFields(value) {
+	for (var key in value) {
+		if (value.hasOwnProperty(key)) {
+			var elm = document.getElementById(key);
+			if (elm !== null && elm !== undefined) {
+				elm.innerHTML = value[key];
+			}
+		}
+	}
 }
 
 function log(txt) {
