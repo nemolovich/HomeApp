@@ -1,5 +1,6 @@
 var MESSAGE_BOX_ID=0;
 var DEFAULT_HIDDING_TIME=2000;
+var DIALOG_BACKGROUND;
 
 function hideMessage(id) {
 	hideMessage(id, DEFAULT_HIDDING_TIME);
@@ -32,7 +33,9 @@ function killMessage(id) {
 	box.css('min-height', '0px');
 	var close = box.find('.title');
 	close.css('display', 'none');
-	box.slideUp(500);
+	box.slideUp(500, function() {
+		$(this).remove();
+	});
 }
 
 function showMessage(id, time) {
@@ -74,6 +77,57 @@ function addMessage(title, msg, style) {
 	showMessage(id, 20000);
 }
 
-$(document).ready(function() {
-	$('.msgBox')
+//$(document).ready(function() {
+//	$('.msgBox')
+//});
+
+function openDialog(dialogID, modal) {
+	var dialog = $('#' + dialogID);
+	if(modal) {
+		DIALOG_BACKGROUND.stop();
+		DIALOG_BACKGROUND.clearQueue();
+		DIALOG_BACKGROUND.fadeIn(500, 'swing');
+	}
+	dialog.stop();
+	dialog.clearQueue();
+	dialog.show(1000);
+}
+
+function closeDialog(dialogID) {
+	var dialog = $('#' + dialogID);
+	DIALOG_BACKGROUND.stop();
+	dialog.stop();
+	DIALOG_BACKGROUND.clearQueue();
+	dialog.clearQueue();
+	DIALOG_BACKGROUND.fadeOut(500, 'swing');
+	dialog.hide(1000);
+}
+
+function addDialogTitle(dialogID, dialogTitle) {
+	var dialog = $('#' + dialogID);
+	var titleDiv = '<div class="title">' + dialogTitle + '<span class="icon-close" onclick="javascript:closeDialog(\'' + dialogID + '\');"/></div>';
+	dialog.prepend(titleDiv);
+}
+
+$(function() {
+	DIALOG_BACKGROUND = $('<div id="modal-background"></div>');
+	$('body').prepend(DIALOG_BACKGROUND);
+	$('body').append('<div id="msgBoxContainer"></div>');
+	
+	$( "#opener" ).click(function() {
+	  openDialog('dialog1');
+	});
+	
+	$( "#closer" ).click(function() {
+	  closeDialog('dialog1');
+	});
+	
+	$('.dialog').each(function(index) {
+		var elm = $(this);
+		var title = elm.attr('title');
+		elm.removeAttr('title');
+		addDialogTitle(elm.attr('id'), title);
+		elm.remove();
+		$('body').prepend(elm);
+	});
 });

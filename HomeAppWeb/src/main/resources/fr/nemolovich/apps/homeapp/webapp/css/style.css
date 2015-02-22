@@ -163,14 +163,16 @@ a {
 #content-div,
 #main-div,
 #msgBoxContainer,
-#msgBoxContainer .msgBox  {
+#msgBoxContainer .msgBox,
+.dialog {
 	display:						block;
 }
 
 #header,
 #footer,
 #content-div,
-#msgBoxContainer .msgBox  {
+#msgBoxContainer .msgBox,
+.dialog {
 	color:							#F0F0F0;
 }
 
@@ -193,6 +195,7 @@ box-shadow:						inset 5px 5px 5em rgba(240, 240, 240, 0.01),
 }
 
 #msgBoxContainer .msgBox,
+.dialog,
 #header,
 #footer {
 box-shadow:						inset 5px 5px 1em rgba(240, 240, 240, 0.01),
@@ -213,7 +216,7 @@ box-shadow:						inset 5px 5px 1em rgba(240, 240, 240, 0.01),
 	min-height:						1.5%;
 padding:						10px 2.5%;
 	width:							95%;
-	z-index: 						999;
+	z-index: 						1010;
 	margin:							auto;
 text-align:						right;
 	border-right:					1px solid rgba(60, 60, 60, 0.28);
@@ -242,10 +245,11 @@ text-align:						right;
 	height:							auto;
 	bottom:							5%;
 	left:							2.5%;
-	z-index:						10101;
+	z-index:						101;
 }
 
-#msgBoxContainer .msgBox {
+#msgBoxContainer .msgBox,
+.dialog {
 	width:							auto;
 	min-height:						45px;
 	padding:						10px;
@@ -260,19 +264,31 @@ background:						rgba(1, 1, 1, 0.8);
 	border-bottom:					1px solid rgba(150, 150, 150, 0.27);
 }
 
-#msgBoxContainer .msgBox .icon-close {
+.dialog {
+	background:						rgba(1, 1, 1, 0.9);
+	font-size:						1em;
+}
+
+#msgBoxContainer .msgBox .icon-close,
+.dialog .icon-close {
 	display:						none;
 }
 
-#msgBoxContainer .msgBox:hover .icon-close {
+#msgBoxContainer .msgBox:hover .icon-close,
+.dialog:hover .icon-close {
 	display:						block;
 }
 
-#msgBoxContainer .msgBox .title {
+#msgBoxContainer .msgBox .title,
+.dialog .title {
 	padding-top:					2px;
 	margin-bottom:					4px;
 	font-size:						1.2em;
 	font-weight:					bold;
+}
+
+.dialog .title {
+	font-size:						1.3em;
 }
 
 #logo-div {

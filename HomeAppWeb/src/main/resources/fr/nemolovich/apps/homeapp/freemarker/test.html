@@ -1,8 +1,10 @@
 <#import "templates/master.html" as layout />
 
 <@layout.master title="Test page">
-
-<form action="#">
+<div id="dialog1" class="dialog" title="Basic dialog">
+	<p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+<form>
 	<table>
 		<tr>
 			<td>
@@ -21,7 +23,7 @@
 			</td>
 	</table>
 	<input type="submit" class="ui-button" value="Submit"
-		   onclick="javascript:request(bean, fields);"/>
+		   onclick="javascript:return request(bean, fields);"/>
 </form>
 
 </body>
