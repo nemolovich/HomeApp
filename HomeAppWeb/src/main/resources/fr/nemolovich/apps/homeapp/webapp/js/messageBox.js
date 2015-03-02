@@ -65,7 +65,7 @@ function addMessage(title, msg, style) {
 		classType = " " + style
 	}
 	var box = $('<div class="msgBox' + classType + '" id="' + id + '"></div>');
-	var div = $('<div class="icon-close""></div>');
+	var div = $('<div class="icon-close" title="Close message"></div>');
 	div.click(function () {
 		killMessage(id);
 	});
@@ -107,7 +107,7 @@ function closeDialog(dialogID) {
 function addDialogTitle(dialogID, dialogTitle) {
 	var dialog = $('#' + dialogID);
 	var titleDiv = '<div class="title" title="Move window">' + dialogTitle +
-			'<span class="icon-close" onclick="javascript:closeDialog(\'' +
+			'<span class="icon-close" title="Close window" onclick="javascript:closeDialog(\'' +
 			dialogID + '\');"/></div>';
 	dialog.prepend(titleDiv);
 }

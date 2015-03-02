@@ -254,7 +254,7 @@ text-align:						right;
 	min-height:						45px;
 	padding:						10px;
 	margin-bottom:					8px;
-background:						rgba(1, 1, 1, 0.8);
+	background:						rgba(1, 1, 1, 0.8);
 	font-size:						0.9em;
 	-webkit-border-radius:			10px;
 	border-radius:					10px;
@@ -265,8 +265,27 @@ background:						rgba(1, 1, 1, 0.8);
 }
 
 .dialog {
-	background:						rgba(1, 1, 1, 0.9);
 	font-size:						1em;
+	position:						absolute;
+	display:						none;
+	left:							150px;
+	top:							150px;
+	margin:							auto;
+	padding:						0px;
+	min-width:						200px;
+	min-height:						100px;
+	max-width:						50%;
+	background:						rgba(50, 50, 50, 0.8);
+	z-index:						101010;
+	color:							#F0F0F0;
+}
+
+.dialog p {
+	padding:						0px 10px;
+}
+
+.dialog .title:hover {
+	cursor:							move;
 }
 
 #msgBoxContainer .msgBox .icon-close,
@@ -289,6 +308,9 @@ background:						rgba(1, 1, 1, 0.8);
 
 .dialog .title {
 	font-size:						1.3em;
+	background:						rgba(10,10,10,0.7);
+	padding:						6px 6px 6px 16px;
+	border-radius:					8px;
 }
 
 #logo-div {

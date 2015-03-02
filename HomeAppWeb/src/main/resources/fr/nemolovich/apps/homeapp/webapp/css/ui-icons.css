@@ -673,29 +673,6 @@
 	cursor:							move;
 }
 
-.dialog {
-	position:						absolute;
-	display:						none;
-	left:							150px;
-	top:							150px;
-	margin:							auto;
-	min-width:						200px;
-	min-height:						100px;
-	max-width:						50%;
-	background:						rgba(50, 50, 50, 0.8);
-	z-index:						101010;
-	color:							#F0F0F0;
-}
-
-.dialog-title {
-	background:						rgba(50, 50, 100, 0.8);
-	font-size:						1.1em;
-}
-
-.dialog .title:hover {
-	cursor:							move;
-}
-
 #modal-background {
 	position:						absolute;
 	top:							0;
