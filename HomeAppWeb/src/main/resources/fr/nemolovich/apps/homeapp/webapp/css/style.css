@@ -177,7 +177,8 @@ a {
 }
 
 #content-div,
-#main-div {
+#main-div,
+.dialog {
 box-shadow:						inset 5px 5px 5em rgba(240, 240, 240, 0.01),
 									inset 0px -5px 5em rgba(0, 0, 0, 0.99),
 									rgba(0,0,0,0.4) 0px 0px 5em,
@@ -195,7 +196,6 @@ box-shadow:						inset 5px 5px 5em rgba(240, 240, 240, 0.01),
 }
 
 #msgBoxContainer .msgBox,
-.dialog,
 #header,
 #footer {
 box-shadow:						inset 5px 5px 1em rgba(240, 240, 240, 0.01),
@@ -248,14 +248,13 @@ text-align:						right;
 	z-index:						101;
 }
 
-#msgBoxContainer .msgBox,
-.dialog {
-	width:							auto;
-	min-height:						45px;
-	padding:						10px;
+#msgBoxContainer .msgBox {
 	margin-bottom:					8px;
-	background:						rgba(1, 1, 1, 0.8);
+	width:							auto;
 	font-size:						0.9em;
+	padding:						10px;
+	min-height:						45px;
+	background:						rgba(1, 1, 1, 0.8);
 	-webkit-border-radius:			10px;
 	border-radius:					10px;
 	border-right:					1px solid rgba(60, 60, 60, 0.28);
@@ -265,6 +264,7 @@ text-align:						right;
 }
 
 .dialog {
+	width:							auto;
 	font-size:						1em;
 	position:						absolute;
 	display:						none;
@@ -281,7 +281,7 @@ text-align:						right;
 }
 
 .dialog p {
-	padding:						0px 10px;
+	padding:						0px 25px;
 }
 
 .dialog .title:hover {
@@ -311,6 +311,7 @@ text-align:						right;
 	background:						rgba(10,10,10,0.7);
 	padding:						6px 6px 6px 16px;
 	border-radius:					8px;
+	border-bottom:					1px solid rgba(250, 250, 250, 0.27);
 }
 
 #logo-div {

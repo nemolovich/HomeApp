@@ -1,7 +1,9 @@
 var MESSAGE_BOX_ID = 0;
 var DEFAULT_HIDDING_TIME = 2000;
 var DIALOG_BACKGROUND;
-var DIALOG_FROM = null;
+// Using two variables instead of JSON object for performances
+var DIALOG_FROM_X = null;
+var DIALOG_FROM_Y = null;
 
 function hideMessage(id) {
 	hideMessage(id, DEFAULT_HIDDING_TIME);
@@ -78,10 +80,6 @@ function addMessage(title, msg, style) {
 	showMessage(id, 20000);
 }
 
-//$(document).ready(function() {
-//	$('.msgBox')
-//});
-
 function openDialog(dialogID, modal) {
 	var dialog = $('#' + dialogID);
 	if (modal) {
@@ -106,33 +104,41 @@ function closeDialog(dialogID) {
 
 function addDialogTitle(dialogID, dialogTitle) {
 	var dialog = $('#' + dialogID);
-	var titleDiv = '<div class="title" title="Move window">' + dialogTitle +
-			'<span class="icon-close" title="Close window" onclick="javascript:closeDialog(\'' +
-			dialogID + '\');"/></div>';
+	var titleDiv = $('<div class="title" title="Move window">' + dialogTitle +
+			'<span class="icon-close" title="Close window"</div>');
+	titleDiv.click(function() {
+		 closeDialog(dialogID);
+	});
 	dialog.prepend(titleDiv);
 }
 
 function dialogDrag(dialog, event) {
-	DIALOG_FROM = {x: event.clientX, y: event.clientY};
+	DIALOG_FROM_X = event.clientX;
+	DIALOG_FROM_Y = event.clientY;
 	dialog.addClass('ui-moving-object');
 }
 
 function dialogMove(dialog, event) {
-	if (DIALOG_FROM) {
-		dialog.css('top', dialog.offset().top - (DIALOG_FROM.y - event.clientY));
-		dialog.css('left', dialog.offset().left - (DIALOG_FROM.x - event.clientX));
-		DIALOG_FROM = {x: event.clientX, y: event.clientY};
+	if (DIALOG_FROM_X && DIALOG_FROM_Y) {
+		var offset = dialog.offset();
+		dialog.css('top', offset.top - (DIALOG_FROM_Y - event.clientY));
+		dialog.css('left', offset.left - (DIALOG_FROM_X - event.clientX));
+		DIALOG_FROM_X = event.clientX;
+		DIALOG_FROM_Y = event.clientY;
 	}
 }
 
 function dialogDrop(dialog, event) {
-	if (DIALOG_FROM) {
-		dialog.css('top', dialog.offset().top - (DIALOG_FROM.y - event.clientY));
-		dialog.css('left', dialog.offset().left - (DIALOG_FROM.x - event.clientX));
-		DIALOG_FROM = {x: event.clientX, y: event.clientY};
+	if (DIALOG_FROM_X && DIALOG_FROM_Y) {
+		var offset = dialog.offset();
+		dialog.css('top', offset.top - (DIALOG_FROM_Y - event.clientY));
+		dialog.css('left', offset.left - (DIALOG_FROM_X - event.clientX));
+		DIALOG_FROM_X = event.clientX;
+		DIALOG_FROM_Y = event.clientY;
 	}
 	dialog.removeClass('ui-moving-object');
-	DIALOG_FROM = null;
+	DIALOG_FROM_X = null;
+	DIALOG_FROM_Y = null;
 }
 
 $(function () {
