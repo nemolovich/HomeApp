@@ -24,6 +24,16 @@
 	</table>
 	<input type="submit" class="ui-button" value="Submit"
 		   onclick="javascript:return request(bean, fields);"/>
+	<div>
+		<h3>Tests Messages:</h3>
+		<p>
+			<#if Session ??>
+				There is a session
+			<#else>
+				There is no session
+			</#if>
+		</p>
+	</div>
 </form>
 
 </body>
