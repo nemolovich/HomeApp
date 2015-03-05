@@ -30,7 +30,6 @@ public class TestPage extends WebRouteServlet {
 	@Override
 	protected void doGet(Request request, Response response,
 		SimpleHash root) throws TemplateException, IOException {
-
 	}
 
 	@Override

@@ -29,6 +29,7 @@
 		<p>
 			<#if Session ??>
 				There is a session
+				<span>${Session.User.name}</span>
 			<#else>
 				There is no session
 			</#if>
