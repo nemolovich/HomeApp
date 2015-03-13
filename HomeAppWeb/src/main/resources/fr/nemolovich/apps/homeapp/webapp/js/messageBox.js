@@ -5,10 +5,6 @@ var DIALOG_BACKGROUND;
 var DIALOG_FROM_X = null;
 var DIALOG_FROM_Y = null;
 
-function hideMessage(id) {
-	hideMessage(id, DEFAULT_HIDDING_TIME);
-}
-
 function hideMessage(id, time) {
 	var box = $('#' + id);
 	box.mouseenter(function () {
@@ -20,6 +16,12 @@ function hideMessage(id, time) {
 	box.clearQueue();
 	box.stop();
 	var duration = 3000;
+	var delay;
+	if (time) {
+		delay = time;
+	} else {
+		delay = DEFAULT_HIDDING_TIME;
+	}
 	box.delay(time).animate({
 		"opacity": "0"
 	}, duration, function () {
@@ -106,8 +108,8 @@ function addDialogTitle(dialogID, dialogTitle) {
 	var dialog = $('#' + dialogID);
 	var titleDiv = $('<div class="title" title="Move window">' + dialogTitle +
 			'<span class="icon-close" title="Close window"</div>');
-	titleDiv.click(function() {
-		 closeDialog(dialogID);
+	titleDiv.click(function () {
+		closeDialog(dialogID);
 	});
 	dialog.prepend(titleDiv);
 }

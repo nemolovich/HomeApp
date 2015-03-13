@@ -5,7 +5,6 @@
  */
 package fr.nemolovich.apps.homeapp.route.pages;
 
-import fr.nemolovich.apps.nemolight.constants.NemoLightConstants;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
 import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import fr.nemolovich.apps.nemolight.security.CommonUtils;
@@ -13,13 +12,15 @@ import fr.nemolovich.apps.nemolight.security.GlobalSecurity;
 import fr.nemolovich.apps.nemolight.security.SecurityConfiguration;
 import fr.nemolovich.apps.nemolight.security.SecurityStatus;
 import fr.nemolovich.apps.nemolight.security.User;
+import fr.nemolovich.apps.nemolight.session.MessageSeverity;
+import fr.nemolovich.apps.nemolight.session.Session;
+import fr.nemolovich.apps.nemolight.session.SessionUtils;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
 import java.io.IOException;
 import spark.Request;
 import spark.Response;
-import spark.Session;
 
 /**
  *
@@ -52,20 +53,24 @@ public class LoginPage extends WebRouteServlet {
 		SecurityStatus status
 			= GlobalSecurity.submitAuthentication(name,
 				CommonUtils.getEncryptedPassword(password));
+
+		spark.Session session = request.session(true);
+		Session userSession = SessionUtils.getSession(session);
+
 		if (status.equals(SecurityStatus.AUTH_SUCCESS)) {
 			User user = SecurityConfiguration
 				.getInstance().getUser(name);
-			Session session = request.session(true);
-			session.attribute(NemoLightConstants.USER_ATTR,
-				user);
-			String expectedPage = request.session().attribute(
-				NemoLightConstants.EXPECTED_PAGE_ATTR);
+			userSession.setUser(user);
+			String expectedPage = userSession.getExpectedPage();
 			if (expectedPage != null) {
-				session.removeAttribute(
-					NemoLightConstants.EXPECTED_PAGE_ATTR);
-				response.redirect(expectedPage);
+				userSession.redirect(response);
 			}
+			SessionUtils.submitMessage(userSession, "Login succeed",
+				"You are now connected.", MessageSeverity.INFO);
 		} else {
+			SessionUtils.submitMessage(userSession, "Login error",
+				"Login error. Please check your login/password.",
+				MessageSeverity.ERROR);
 			root.put("login_error",
 				"Login error. Please check your login/password.");
 		}
