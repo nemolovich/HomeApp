@@ -5,6 +5,8 @@
  */
 package fr.nemolovich.apps.homeapp.route.pages;
 
+import fr.nemolovich.apps.homeapp.utils.HomeAppConstants;
+import fr.nemolovich.apps.homeapp.video.FileExtensionFilter;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
 import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import fr.nemolovich.apps.nemolight.session.MessageSeverity;
@@ -22,56 +24,44 @@ import spark.Response;
  *
  * @author Nemolovich
  */
-@RouteElement(path = "/player/:video", page = "player.html")
+@RouteElement(path = "/player", page = "player.html")
 public class Player extends WebRouteServlet {
+    
+    public Player(String path, String templateName,
+        Configuration config)
+        throws IOException {
+        super(path, templateName, config);
+    }
 
-	private static final String DEFAULT_PATH = "C:/Users/Nemolovich/Desktop/Temp";
-	private static final String DEFAULT_PROTOCOL = "file";
-	private static final String DEFAULT_EXTENSION = "avi";
+    @Override
+    protected void doGet(Request request, Response response,
+        SimpleHash root)
+        throws TemplateException, IOException {
+        String video = request.raw().getParameter("video");
+        String subFolder = request.raw().getParameter("folder");
 
-	public Player(String path, String templateName,
-		Configuration config)
-		throws IOException {
-		super(path, templateName, config);
-	}
+        String rootPath = HomeAppConstants.APP_VIDEO_ROOT_PATH;
+        if (subFolder != null) {
+            rootPath = rootPath.concat("/").concat(subFolder);
+        }
+        File rootFolder = new File(rootPath);
 
-	@Override
-	protected void doGet(Request request, Response response,
-		SimpleHash root)
-		throws TemplateException, IOException {
-		String video = request.params("video");
-		String ext = request.raw().getParameter("type");
-		ext = ext == null ? DEFAULT_EXTENSION : ext;
-		String protocol = request.raw().getParameter("protocol");
-		protocol = protocol == null ? DEFAULT_PROTOCOL : protocol;
-		String path = request.raw().getParameter("path");
-		String subFolder = request.raw().getParameter("folder");
+        if (video == null) {
+            root.put("files", rootFolder.listFiles(new FileExtensionFilter(
+                HomeAppConstants.APP_VIDEO_EXTENSIONS, true)));
+        } else {
+            root.put("src", String.format("file://%s/%s",
+                rootPath, video));
+        }
+    }
 
-		String rootPath = DEFAULT_PATH;
-		if (subFolder != null) {
-			rootPath = rootPath.concat("/").concat(subFolder);
-		}
-		File rootFolder = new File(rootPath);
+    @Override
+    protected void doPost(Request request, Response response, SimpleHash root)
+        throws TemplateException, IOException {
+    }
 
-		path = path == null ? DEFAULT_PATH : path;
-		if (video == null) {
-			root.put("src", "");
-			root.put("files", rootFolder.listFiles());
-			SessionUtils.submitMessage(null, path, path, MessageSeverity.DEFAULT);
-		} else {
-			root.put("src", String.format("%s://%s/%s.%s",
-				protocol, protocol.equals("file") ? "/"
-					: "".concat(path), video, ext));
-		}
-	}
-
-	@Override
-	protected void doPost(Request request, Response response, SimpleHash root)
-		throws TemplateException, IOException {
-	}
-
-	@Override
-	public void getAjaxRequest(JSONObject request, SimpleHash root) {
-		super.getAjaxRequest(request, root);
-	}
+    @Override
+    public void getAjaxRequest(JSONObject request, SimpleHash root) {
+        super.getAjaxRequest(request, root);
+    }
 }
