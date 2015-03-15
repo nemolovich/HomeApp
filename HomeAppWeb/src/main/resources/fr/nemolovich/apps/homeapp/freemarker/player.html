@@ -21,14 +21,41 @@
 			target="${src}">
 		</embed>
 	</#if>
+	<!-- Parameters -->
+	<p>1 -- 
+	<!-- <#if RequestParameters ??> -->
+		<!-- <#if RequestParameters.folder> -->
+			Current folder: ${RequestParameters.folder}
+		<!-- </#if> -->
+	<!-- </#if> -->
+	</p>
+	<p>2 -- 
+	<#if request ??>
+		Current folder: ${request.getParameter("folder")}
+	</#if>
+	</p>
+	<p>3 -- 
+	<#if Request ??>
+		<#if Request.request ??>
+			Request.request.attribute['folder']: ${Request.request.attribute['folder']}
+		</#if>
+		request.attribute['folder']: ${request.attribute['folder']}
+		Request.attribute['folder']: ${Request.attribute['folder']}
+		Request.getParameter("folder"): ${Request.getParameter("folder")}
+		<#if Request.folder ??>
+			Request.folder: ${Request.folder}
+		</#if>
+	</#if>
+	</p>
+	<!-- Parameters -->
 	<#if files ??>
 		<#if 0 < files?size >
 			<#list files as file>
 			<p>
 			<#if file.directory>
-				Folder: ${file.name}
+				Folder: <a href="?folder=${file.name}" title="Open folder '${file.name}'">${file.name}</a>
 			<#else>
-				File: ${file.name}
+				File: <a href="?video=${file.name}" title="Open video '${file.name}'">${file.name}</a>
 			</#if>
 			</p>
 			</#list>

@@ -5,7 +5,7 @@
  */
 package fr.nemolovich.apps.homeapp.route.pages;
 
-import fr.nemolovich.apps.homeapp.utils.FilesListUtils;
+import fr.nemolovich.apps.homeapp.utils.FilesListComparator;
 import fr.nemolovich.apps.homeapp.utils.HomeAppConstants;
 import fr.nemolovich.apps.homeapp.video.FileExtensionFilter;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
@@ -52,10 +52,10 @@ public class Player extends WebRouteServlet {
             List<File> files = Arrays.asList(rootFolder.listFiles(
                 new FileExtensionFilter(HomeAppConstants.APP_VIDEO_EXTENSIONS,
                     true)));
-            Collections.sort(files, new FilesListUtils());
+            Collections.sort(files, new FilesListComparator());
             root.put("files", files);
         } else {
-            root.put("src", String.format("file://%s/%s",
+            root.put("src", String.format("file:///%s/%s",
                 rootPath, video));
         }
     }

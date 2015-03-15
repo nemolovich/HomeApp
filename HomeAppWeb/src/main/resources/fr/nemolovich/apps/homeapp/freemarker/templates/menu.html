@@ -1,10 +1,10 @@
 
-
-
 <div id="header">
-	<#if session_user??>
-	User: ${session_user.name}
+	<#if Session ??>
+		<#if Session.user ??>
+		User: ${Session.user.name}
+		</#if>
 	</#if>
-	<a href="/signup">Signup</a> <a href="/signup">Login</a>
+	<a href="/login">Signup</a> <a href="/login">Login</a>
 </div>
 <script type="text/javascript" src="/js/menu.js"></script>
