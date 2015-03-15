@@ -43,7 +43,7 @@ public class FileExtensionFilter implements FileFilter {
 
     public FileExtensionFilter(List<String> extensions, boolean allowFolder) {
         this.extensions = new ConcurrentLinkedQueue<>(extensions);
-        this.folderAllowed = false;
+        this.folderAllowed = allowFolder;
     }
 
     public List<String> getExtensions() {

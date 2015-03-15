@@ -8,7 +8,8 @@
 	<p class="error">${error}</p>
 <#else>
 	
-	<embed type="application/x-vlc-plugin" 
+	<#if src??>
+		<embed type="application/x-vlc-plugin" 
 			pluginspage="http://www.videolan.org" 
 			version="VideoLAN.VLCPlugin.2"
 			name="vlc"
@@ -18,7 +19,21 @@
 			loop="0"
 			bgcolor="#606060"
 			target="${src}">
-	</embed>
+		</embed>
+	</#if>
+	<#if files ??>
+		<#if 0 < files?size >
+			<#list files as file>
+			<p>
+			<#if file.directory>
+				Folder: ${file.name}
+			<#else>
+				File: ${file.name}
+			</#if>
+			</p>
+			</#list>
+		</#if>
+	</#if>
 </#if>
 	
 </@layout.master>
