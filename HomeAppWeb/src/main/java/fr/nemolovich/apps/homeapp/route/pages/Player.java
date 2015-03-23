@@ -29,44 +29,61 @@ import spark.Response;
 @RouteElement(path = "/player", page = "player.html")
 public class Player extends WebRouteServlet {
 
-    public Player(String path, String templateName,
-        Configuration config)
-        throws IOException {
-        super(path, templateName, config);
-    }
+	public Player(String path, String templateName,
+		Configuration config)
+		throws IOException {
+		super(path, templateName, config);
+	}
 
-    @Override
-    protected void doGet(Request request, Response response,
-        SimpleHash root)
-        throws TemplateException, IOException {
-        String video = request.raw().getParameter("video");
-        String subFolder = request.raw().getParameter("folder");
+	@Override
+	protected void doGet(Request request, Response response,
+		SimpleHash root)
+		throws TemplateException, IOException {
+		String video = request.raw().getParameter("video");
+		String subFolder = request.raw().getParameter("folder");
 
-        String rootPath = HomeAppConstants.APP_VIDEO_ROOT_PATH;
-        if (subFolder != null) {
-            rootPath = rootPath.concat("/").concat(subFolder);
-        }
-        File rootFolder = new File(rootPath);
+		String rootPath = HomeAppConstants.APP_VIDEO_ROOT_PATH;
+		String rootFolderName = new File(rootPath).getName();
+		if (subFolder != null && !subFolder.isEmpty()) {
+			rootPath = rootPath.concat("/").concat(subFolder);
+		}
+		File rootFolder = new File(rootPath);
 
-        if (video == null) {
-            List<File> files = Arrays.asList(rootFolder.listFiles(
-                new FileExtensionFilter(HomeAppConstants.APP_VIDEO_EXTENSIONS,
-                    true)));
-            Collections.sort(files, new FilesListComparator());
-            root.put("files", files);
-        } else {
-            root.put("src", String.format("file:///%s/%s",
-                rootPath, video));
-        }
-    }
+		if (video == null) {
+			List<File> files = Arrays.asList(rootFolder.listFiles(
+				new FileExtensionFilter(HomeAppConstants.APP_VIDEO_EXTENSIONS,
+					true)));
+			Collections.sort(files, new FilesListComparator());
+			root.put("files", files);
+			String directParent = subFolder == null
+				|| subFolder.isEmpty()
+					? rootFolderName : rootFolder
+					.getParentFile().getName();
+			File prevFolder = rootFolder;
+			String parentFolderName = directParent.equals(
+				rootFolderName) ? "" : directParent;
+			while (!prevFolder.getName().equals(directParent)) {
+				parentFolderName = parentFolderName
+					.concat("/").concat(prevFolder.getName());
+				prevFolder = prevFolder.getParentFile();
+			}
+			if (parentFolderName != null
+				&& !parentFolderName.isEmpty()) {
+				root.put("parentFolder", parentFolderName);
+			}
+		} else {
+			root.put("src", String.format("file:///%s/%s",
+				rootPath, video));
+		}
+	}
 
-    @Override
-    protected void doPost(Request request, Response response, SimpleHash root)
-        throws TemplateException, IOException {
-    }
+	@Override
+	protected void doPost(Request request, Response response, SimpleHash root)
+		throws TemplateException, IOException {
+	}
 
-    @Override
-    public void getAjaxRequest(JSONObject request, SimpleHash root) {
-        super.getAjaxRequest(request, root);
-    }
+	@Override
+	public void getAjaxRequest(JSONObject request, SimpleHash root) {
+		super.getAjaxRequest(request, root);
+	}
 }

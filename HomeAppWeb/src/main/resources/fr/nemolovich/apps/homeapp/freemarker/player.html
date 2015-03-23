@@ -23,27 +23,9 @@
 	</#if>
 	<!-- Parameters -->
 	<p>1 -- 
-	<!-- <#if RequestParameters ??> -->
-		<!-- <#if RequestParameters.folder> -->
-			Current folder: ${RequestParameters.folder}
-		<!-- </#if> -->
-	<!-- </#if> -->
-	</p>
-	<p>2 -- 
-	<#if request ??>
-		Current folder: ${request.getParameter("folder")}
-	</#if>
-	</p>
-	<p>3 -- 
-	<#if Request ??>
-		<#if Request.request ??>
-			Request.request.attribute['folder']: ${Request.request.attribute['folder']}
-		</#if>
-		request.attribute['folder']: ${request.attribute['folder']}
-		Request.attribute['folder']: ${Request.attribute['folder']}
-		Request.getParameter("folder"): ${Request.getParameter("folder")}
-		<#if Request.folder ??>
-			Request.folder: ${Request.folder}
+	<#if RequestParameters ??>
+		<#if RequestParameters['folder'] ??>
+			<a href="?folder=${RequestParameters.test}" title="Go back inside parent folder">Parent folder</a>
 		</#if>
 	</#if>
 	</p>
@@ -55,7 +37,7 @@
 			<#if file.directory>
 				Folder: <a href="?folder=${file.name}" title="Open folder '${file.name}'">${file.name}</a>
 			<#else>
-				File: <a href="?video=${file.name}" title="Open video '${file.name}'">${file.name}</a>
+				File: <a href="?video=${file.name}&folder=${file.name}" title="Open video '${file.name}'">${file.name}</a>
 			</#if>
 			</p>
 			</#list>

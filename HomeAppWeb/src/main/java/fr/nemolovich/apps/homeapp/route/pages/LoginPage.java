@@ -62,11 +62,12 @@ public class LoginPage extends WebRouteServlet {
 				.getInstance().getUser(name);
 			userSession.setUser(user);
 			String expectedPage = userSession.getExpectedPage();
-			if (expectedPage != null) {
-				userSession.redirect(response);
-			}
 			SessionUtils.submitMessage(userSession, "Login succeed",
 				"You are now connected.", MessageSeverity.INFO);
+			if (expectedPage != null) {
+				userSession.redirect(response);
+				this.stopProcess();
+			}
 		} else {
 			SessionUtils.submitMessage(userSession, "Login error",
 				"Login error. Please check your login/password.",
