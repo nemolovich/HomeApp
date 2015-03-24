@@ -409,3 +409,23 @@ a.logo-git.hover {
 	background-image:				url(../img/github_FFFFFF.png);
 }
 
+.video-link {
+	background-image:				url(../img/ui-icons_2f44ff_256x240.png);
+	background-repeat:				no-repeat;
+	padding-left:					18px;
+	width:							0px;
+	height:							16px;
+	display:						inline;
+}
+
+a:hover > span.video-link,
+a:focus > span.video-link,
+a.hover > span.video-link {
+	background-image:				url(../img/ui-icons_5591fe_256x240.png);
+}
+
+a:hover > .video-link.ui-icon-folder-collapsed,
+a:focus > .video-link.ui-icon-folder-collapsed,
+a.hover > .video-link.ui-icon-folder-collapsed {
+	background-position:			-16px -96px;
+}

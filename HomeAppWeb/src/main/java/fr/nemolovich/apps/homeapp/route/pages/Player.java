@@ -30,47 +30,48 @@ import spark.Response;
 public class Player extends WebRouteServlet {
 
 	public Player(String path, String templateName, Configuration config)
-			throws IOException {
+		throws IOException {
 		super(path, templateName, config);
 	}
 
 	@Override
 	protected void doGet(Request request, Response response, SimpleHash root)
-			throws TemplateException, IOException {
+		throws TemplateException, IOException {
 		String video = request.raw().getParameter("video");
 		String subFolder = request.raw().getParameter("folder");
 
 		String rootPath = HomeAppConstants.APP_VIDEO_ROOT_PATH;
 		String rootFolderName = new File(rootPath).getName();
 		File rootFolder;
-		
+
 		if (subFolder == null || subFolder.isEmpty()) {
-			
+
 			rootFolder = new File(rootPath);
-			
+
 		} else {
-			
+
 			rootPath = rootPath.concat("/").concat(subFolder);
 			rootFolder = new File(rootPath);
-			
-			File prevFolder = rootFolder.getParentFile();
+
+			File prevFolder = video == null
+				? rootFolder.getParentFile() : rootFolder;
 			String parentFolderName = "";
 			while (!prevFolder.getName().equals(rootFolderName)) {
-				parentFolderName = parentFolderName.concat("/").concat(
-						prevFolder.getName());
+				parentFolderName = prevFolder.getName()
+					.concat("/").concat(parentFolderName);
 				prevFolder = prevFolder.getParentFile();
 			}
-			
+
 			if (parentFolderName != null && !parentFolderName.isEmpty()) {
 				root.put("parentFolder", parentFolderName);
 			}
-			
+
 		}
 
 		if (video == null) {
 			List<File> files = Arrays.asList(rootFolder
-					.listFiles(new FileExtensionFilter(
-							HomeAppConstants.APP_VIDEO_EXTENSIONS, true)));
+				.listFiles(new FileExtensionFilter(
+						HomeAppConstants.APP_VIDEO_EXTENSIONS, true)));
 			Collections.sort(files, new FilesListComparator());
 			root.put("files", files);
 		} else {
@@ -80,7 +81,7 @@ public class Player extends WebRouteServlet {
 
 	@Override
 	protected void doPost(Request request, Response response, SimpleHash root)
-			throws TemplateException, IOException {
+		throws TemplateException, IOException {
 	}
 
 	@Override
