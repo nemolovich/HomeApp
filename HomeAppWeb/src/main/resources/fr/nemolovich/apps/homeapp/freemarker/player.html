@@ -22,22 +22,34 @@
 		</embed>
 	</#if>
 	<!-- Parameters -->
-	<p>1 -- 
+	<#assign prevFolder = "">
+	<#assign currFolder = "">
 	<#if RequestParameters ??>
 		<#if RequestParameters['folder'] ??>
-			<a href="?folder=${RequestParameters.test}" title="Go back inside parent folder">Parent folder</a>
+			<#assign currFolder = RequestParameters['folder']>
+			<p>
+				${currFolder}
+			</p>
+			<p>
+				<a href="?" title="Go back to the root path">&lt;&lt; &lt;&lt; Root folder</a>
+			</p>
+			<#if parentFolder ?? && parentFolder?has_content>
+				<#assign prevFolder = parentFolder>
+			</#if>
+			<p>
+				<a href="?folder=${prevFolder}" title="Go back inside parent folder">&lt;&lt; Parent folder</a>
+			</p>
 		</#if>
 	</#if>
-	</p>
 	<!-- Parameters -->
 	<#if files ??>
 		<#if 0 < files?size >
 			<#list files as file>
 			<p>
 			<#if file.directory>
-				Folder: <a href="?folder=${file.name}" title="Open folder '${file.name}'">${file.name}</a>
+				&gt;&gt; Folder: <a href="?folder=${currFolder}/${file.name}" title="Open folder '${file.name}'">${file.name}</a>
 			<#else>
-				File: <a href="?video=${file.name}&folder=${file.name}" title="Open video '${file.name}'">${file.name}</a>
+				|&gt; File: <a href="?video=${file.name}&folder=${currFolder}" title="Open video '${file.name}'">${file.name}</a>
 			</#if>
 			</p>
 			</#list>
