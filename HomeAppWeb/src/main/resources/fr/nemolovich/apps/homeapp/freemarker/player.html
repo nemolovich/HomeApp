@@ -22,30 +22,32 @@
 		</embed>
 	</#if>
 	<!-- Parameters -->
+	<#assign currFolder = "/">
 	<#assign prevFolder = "">
-	<#assign currFolder = "">
 	<#if RequestParameters ??>
-		<#if RequestParameters['folder'] ??>
-			<#assign currFolder = RequestParameters['folder']>
-			<p>
-				${currFolder}
-			</p>
-			<p>
-				<a href="?" title="Go back to the root path">
-					<span class="video-link ui-icon-home" ></span>
-					Root folder
-				</a>
-			</p>
-			<#if parentFolder ?? && parentFolder?has_content>
-				<#assign prevFolder = parentFolder>
-			</#if>
-			<p>
-				<a href="?folder=${prevFolder}" title="Go back inside parent folder">
-					<span class="video-link ui-icon-arrowreturnthick-1-w" ></span>
-					Parent folder
-				</a>
-			</p>
+		<#if RequestParameters['folder'] ?? && RequestParameters['folder']?has_content>
+			<#assign currFolder = RequestParameters['folder']?replace("/$", "", "r")+"/">
 		</#if>
+	</#if>
+	<p>
+		Current folder: <b>${currFolder}</b>
+	</p>
+	<#if parentFolder ?? && parentFolder?has_content>
+		<#assign prevFolder = "/"+parentFolder?replace("^/", "", "r")>
+	</#if>
+	<#if currFolder?has_content && currFolder != "/">
+		<p>
+			<a href="/player" title="Go back to the root path">
+				<span class="video-link ui-icon-home" ></span>
+				Root folder
+			</a>
+		</p>
+		<p>
+			<a href="?folder=${prevFolder}" title="Go back inside parent folder">
+				<span class="video-link ui-icon-arrowreturnthick-1-w" ></span>
+				Parent folder
+			</a>
+		</p>
 	</#if>
 	<!-- Parameters -->
 	<#if files ??>
@@ -53,7 +55,7 @@
 			<#list files as file>
 			<p>
 			<#if file.directory>
-				<a href="?folder=${currFolder}/${file.name}" title="Open folder '${file.name}'">
+				<a href="?folder=${currFolder}${file.name}" title="Open folder '${file.name}'">
 					<span class="video-link ui-icon-folder-collapsed" ></span>
 					${file.name}
 				</a>
