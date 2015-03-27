@@ -5,5 +5,12 @@
             <key>server.deploy.packageName</key>
             <value>fr/nemolovich/apps/homeapp/</value>
         </entry>
+        <entry>
+            <key>server.deploy.filesPath</key>
+            <list>
+                <value>F:/Users/All/Mes Videos</value>
+                <value>C:/Users/Public/Videos/Sample Video</value>
+            </list>
+        </entry>
     </configs>
 </deployment>
