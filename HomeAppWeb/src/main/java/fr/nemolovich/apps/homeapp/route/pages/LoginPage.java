@@ -8,7 +8,6 @@ package fr.nemolovich.apps.homeapp.route.pages;
 import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
 import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import fr.nemolovich.apps.nemolight.security.CommonUtils;
-import fr.nemolovich.apps.nemolight.security.GlobalSecurity;
 import fr.nemolovich.apps.nemolight.security.SecurityConfiguration;
 import fr.nemolovich.apps.nemolight.security.SecurityStatus;
 import fr.nemolovich.apps.nemolight.security.User;
@@ -51,7 +50,7 @@ public class LoginPage extends WebRouteServlet {
 		root.put("username", name);
 
 		SecurityStatus status
-			= GlobalSecurity.submitAuthentication(name,
+			= SecurityConfiguration.submitAuthentication(name,
 				CommonUtils.getEncryptedPassword(password));
 
 		spark.Session session = request.session(true);
