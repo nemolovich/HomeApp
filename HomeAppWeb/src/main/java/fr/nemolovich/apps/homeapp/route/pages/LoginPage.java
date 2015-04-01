@@ -64,8 +64,8 @@ public class LoginPage extends WebRouteServlet {
 			SessionUtils.submitMessage(userSession, "Login succeed",
 				"You are now connected.", MessageSeverity.INFO);
 			if (expectedPage != null) {
-				userSession.redirect(response);
-				this.stopProcess();
+				this.redirect(request, response);
+//				userSession.redirect(this, response);
 			}
 		} else {
 			SessionUtils.submitMessage(userSession, "Login error",
