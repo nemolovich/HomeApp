@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.nemolovich.apps.homeapp.route.pages;
 
-import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
+import fr.nemolovich.apps.nemolight.route.WebRouteServletAdapter;
 import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
+import fr.nemolovich.apps.nemolight.route.exceptions.ServerException;
 import fr.nemolovich.apps.nemolight.security.CommonUtils;
 import fr.nemolovich.apps.nemolight.security.SecurityConfiguration;
 import fr.nemolovich.apps.nemolight.security.SecurityStatus;
@@ -16,7 +12,6 @@ import fr.nemolovich.apps.nemolight.session.Session;
 import fr.nemolovich.apps.nemolight.session.SessionUtils;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
-import freemarker.template.TemplateException;
 import java.io.IOException;
 import spark.Request;
 import spark.Response;
@@ -26,7 +21,7 @@ import spark.Response;
  * @author Nemolovich
  */
 @RouteElement(path = "/login", page = "login.html", login = true)
-public class LoginPage extends WebRouteServlet {
+public class LoginPage extends WebRouteServletAdapter {
 
 	public LoginPage(String routePath, String page, Configuration config)
 		throws IOException {
@@ -34,15 +29,15 @@ public class LoginPage extends WebRouteServlet {
 	}
 
 	@Override
-	protected void doGet(Request request, Response response, SimpleHash root)
-		throws TemplateException, IOException {
+	protected void doGet(Request request, Response response,
+		SimpleHash root) throws ServerException {
 		root.put("username", "");
 		root.put("login_error", "");
 	}
 
 	@Override
-	protected void doPost(Request request, Response response, SimpleHash root)
-		throws TemplateException, IOException {
+	protected void doPost(Request request, Response response,
+		SimpleHash root) throws ServerException {
 
 		String name = request.queryParams("name");
 		String password = request.queryParams("password");

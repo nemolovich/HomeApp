@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.nemolovich.apps.homeapp.route.pages;
 
-import fr.nemolovich.apps.nemolight.route.WebRouteServlet;
+import fr.nemolovich.apps.nemolight.route.WebRouteServletAdapter;
 import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
+import fr.nemolovich.apps.nemolight.route.exceptions.ServerException;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
-import freemarker.template.TemplateException;
-
 import java.io.IOException;
-
 import spark.Request;
 import spark.Response;
 
@@ -21,7 +14,7 @@ import spark.Response;
  * @author Nemolovich
  */
 @RouteElement(path = "/error/:code", page = "error.html")
-public class ErrorPage extends WebRouteServlet {
+public class ErrorPage extends WebRouteServletAdapter {
 
 	public ErrorPage(String routePath, String page, Configuration config)
 		throws IOException {
@@ -29,8 +22,8 @@ public class ErrorPage extends WebRouteServlet {
 	}
 
 	@Override
-	protected void doGet(Request request, Response response, SimpleHash root)
-		throws TemplateException, IOException {
+	protected void doGet(Request request, Response response,
+		SimpleHash root) throws ServerException {
 
 		String error = request.params("code");
 		root.put("code", error);
@@ -40,12 +33,6 @@ public class ErrorPage extends WebRouteServlet {
 			request.session().removeAttribute("error_details");
 		}
 		root.put("error", "System has encountered an error.");
-	}
-
-	@Override
-	protected void doPost(Request request, Response response, SimpleHash root)
-		throws TemplateException, IOException {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }
