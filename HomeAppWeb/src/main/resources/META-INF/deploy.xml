@@ -6,6 +6,10 @@
             <value>fr/nemolovich/apps/homeapp/</value>
         </entry>
         <entry>
+            <key>server.deploy.appName</key>
+            <value>HomeApp</value>
+        </entry>
+        <entry>
             <key>server.deploy.filesPath</key>
             <list>
                 <value>F:/Users/All/Mes Videos</value>
