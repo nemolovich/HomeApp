@@ -4,10 +4,10 @@ import fr.nemolovich.apps.nemolight.route.WebRouteServletAdapter;
 import fr.nemolovich.apps.nemolight.route.annotations.PageField;
 import fr.nemolovich.apps.nemolight.route.annotations.RouteElement;
 import fr.nemolovich.apps.nemolight.route.exceptions.ServerException;
-import fr.nemolovich.apps.nemolight.security.User;
 import fr.nemolovich.apps.nemolight.session.Message;
 import fr.nemolovich.apps.nemolight.session.MessageSeverity;
 import fr.nemolovich.apps.nemolight.session.Session;
+import fr.nemolovich.apps.nemolight.session.SessionUtils;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
 import java.io.IOException;
@@ -34,8 +34,7 @@ public class TestPage extends WebRouteServletAdapter {
 	@Override
 	protected void doGet(Request request, Response response,
 		SimpleHash root) throws ServerException {
-		Session session = new Session();
-		session.setUser(new User("User1", "password01"));
+		Session session = SessionUtils.getSession(request.session());
 		session.addProperty("test1", "This is the test #1");
 		session.submitMessage(new Message("Info 1",
 			"This is an info message", MessageSeverity.INFO));
