@@ -21,27 +21,27 @@ import spark.Response;
 @RouteElement(path = "/test", page = "test.html")
 public class TestPage extends WebRouteServletAdapter {
 
-	@PageField
-	private String field1;
-	@PageField
-	private String field2;
+    @PageField
+    private String field1;
+    @PageField
+    private String field2;
 
-	public TestPage(String path, String templateName,
-		Configuration config) throws IOException {
-		super(path, templateName, config);
-	}
+    public TestPage(String path, String context, String templateName,
+        Configuration config) throws IOException {
+        super(path, context, templateName, config);
+    }
 
-	@Override
-	protected void doGet(Request request, Response response,
-		SimpleHash root) throws ServerException {
-		Session session = SessionUtils.getSession(request.session());
-		session.addProperty("test1", "This is the test #1");
-		session.submitMessage(new Message("Info 1",
-			"This is an info message", MessageSeverity.INFO));
-		session.submitMessage(new Message("Warning 1",
-			"This is a warning message", MessageSeverity.WARNING));
-		session.submitMessage(new Message("Error 1",
-			"This is an error message", MessageSeverity.ERROR));
-		root.put("Session", session);
-	}
+    @Override
+    protected void doGet(Request request, Response response,
+        SimpleHash root) throws ServerException {
+        Session session = SessionUtils.getSession(request.session());
+        session.addProperty("test1", "This is the test #1");
+        session.submitMessage(new Message("Info 1",
+            "This is an info message", MessageSeverity.INFO));
+        session.submitMessage(new Message("Warning 1",
+            "This is a warning message", MessageSeverity.WARNING));
+        session.submitMessage(new Message("Error 1",
+            "This is an error message", MessageSeverity.ERROR));
+        root.put("Session", session);
+    }
 }

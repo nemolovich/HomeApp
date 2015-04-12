@@ -16,17 +16,17 @@ import spark.Response;
 @RouteElement(path = "/", page = "login.html")
 public class HomePage extends WebRouteServletAdapter {
 
-	public HomePage(String routePath, String page, Configuration config)
-		throws IOException {
-		super(routePath, page, config);
-	}
+    public HomePage(String routePath, String context, String page,
+        Configuration config) throws IOException {
+        super(routePath, context, page, config);
+    }
 
-	@Override
-	protected void doGet(Request request, Response response, SimpleHash root)
-		throws ServerException {
+    @Override
+    protected void doGet(Request request, Response response, SimpleHash root)
+        throws ServerException {
 
-		root.put("username", "");
-		root.put("login_error", "");
-	}
+        root.put("username", "");
+        root.put("login_error", "");
+    }
 
 }

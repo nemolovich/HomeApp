@@ -16,23 +16,23 @@ import spark.Response;
 @RouteElement(path = "/error/:code", page = "error.html")
 public class ErrorPage extends WebRouteServletAdapter {
 
-	public ErrorPage(String routePath, String page, Configuration config)
-		throws IOException {
-		super(routePath, page, config);
-	}
+    public ErrorPage(String routePath, String context, String page,
+        Configuration config) throws IOException {
+        super(routePath, context, page, config);
+    }
 
-	@Override
-	protected void doGet(Request request, Response response,
-		SimpleHash root) throws ServerException {
+    @Override
+    protected void doGet(Request request, Response response,
+        SimpleHash root) throws ServerException {
 
-		String error = request.params("code");
-		root.put("code", error);
-		String details = request.session().attribute("error_details");
-		if (details != null) {
-			root.put("error_details", details);
-			request.session().removeAttribute("error_details");
-		}
-		root.put("error", "System has encountered an error.");
-	}
+        String error = request.params("code");
+        root.put("code", error);
+        String details = request.session().attribute("error_details");
+        if (details != null) {
+            root.put("error_details", details);
+            request.session().removeAttribute("error_details");
+        }
+        root.put("error", "System has encountered an error.");
+    }
 
 }
