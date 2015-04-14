@@ -18,7 +18,7 @@
 }
 
 .icon-info {
-	background-image:				url(../img/icon-info.png) !important;
+	background-image:				url('${ApplicationContext}/img/icon-info.png') !important;
 	background-size:				20px 20px !important;
 	background-repeat:				no-repeat !important;
 	background-position:			10px 10px !important;
@@ -26,7 +26,7 @@
 }
 
 .icon-warning {
-	background-image:				url(../img/icon-warning.png) !important;
+	background-image:				url('${ApplicationContext}/img/icon-warning.png') !important;
 	background-size:				20px 20px !important;
 	background-repeat:				no-repeat !important;
 	background-position:			10px 10px !important;
@@ -34,7 +34,7 @@
 }
 
 .icon-error {
-	background-image:				url(../img/icon-error.png) !important;
+	background-image:				url('${ApplicationContext}/img/icon-error.png') !important;
 	background-size:				20px 20px !important;
 	background-repeat:				no-repeat !important;
 	background-position:			10px 10px !important;
@@ -65,7 +65,7 @@
 	width:							11px;
 	float:							right;
 	background-color:				rgba(150, 50, 50, 0.8);
-	background-image:				url(../img/icon-close.png) !important;
+	background-image:				url('${ApplicationContext}/img/icon-close.png') !important;
 	background-size:				9px 9px !important;
 	background-repeat:				no-repeat !important;
 	background-position:			1px 1px !important;
@@ -94,7 +94,7 @@
 }
 
 .ui-icon > span {
-	background-image:				url(../img/ui-icons_8d8d8d_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_8d8d8d_256x240.png');
 	display:						block;
 	width:							16px;
 	height:							16px;
@@ -104,37 +104,37 @@
 .ui-icon:hover > span,
 .ui-icon:focus > span,
 .ui-icon.hover > span {
-	background-image:				url(../img/ui-icons_ffffff_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_ffffff_256x240.png');
 }
 
 .ui-icon > span.red-ui-icon {
-	background-image:				url(../img/ui-icons_b00000_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_b00000_256x240.png');
 }
 
 .ui-icon:hover > span.red-ui-icon,
 .ui-icon:focus > span.red-ui-icon,
 .ui-icon.hover > span.red-ui-icon {
-	background-image:				url(../img/ui-icons_fe1717_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_fe1717_256x240.png');
 }
 
 .ui-icon > span.blue-ui-icon {
-	background-image:				url(../img/ui-icons_2f44ff_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_2f44ff_256x240.png');
 }
 
 .ui-icon:hover > span.blue-ui-icon,
 .ui-icon:focus > span.blue-ui-icon,
 .ui-icon.hover > span.blue-ui-icon {
-	background-image:				url(../img/ui-icons_5591fe_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_5591fe_256x240.png');
 }
 
 .ui-icon > span.green-ui-icon {
-	background-image:				url(../img/ui-icons_087e00_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_087e00_256x240.png');
 }
 
 .ui-icon:hover > span.green-ui-icon,
 .ui-icon:focus > span.green-ui-icon,
 .ui-icon.hover > span.green-ui-icon {
-	background-image:				url(../img/ui-icons_00cc11_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_00cc11_256x240.png');
 }
 
 .ui-icon-blank {

@@ -109,7 +109,7 @@ html {
 }
 
 body {
-background:						#666666 url(../img/background.png) 50% 0% repeat-y;
+background:						#666666 url('${ApplicationContext}/img/background.png') 50% 0% repeat-y;
 font-family:					helvetica, arial, san-serif;
 background-position:			top center;
 background-repeat:				repeat-y;
@@ -318,7 +318,7 @@ text-align:						right;
 	width:							150px;
 	height:							75px;
 	margin:							10px 0px 10px 10%;
-	background-image:				url(../img/my-logo.png);
+	background-image:				url('${ApplicationContext}/img/my-logo.png');
 	background-position:			top center;
 background-repeat:				no-repeat;
 	background-size:				150px 75px;
@@ -338,7 +338,7 @@ padding:						1.5%;
 
 #main-div {
 	color:							#2E2E2E;
-background-image:				url('../img/container.png');
+background-image:				url('${ApplicationContext}/img/container.png');
 background-position:			top center;
 background-repeat:				repeat;
 width:							90%;
@@ -396,7 +396,7 @@ padding:						2.5%;
 }
 
 a.logo-git {
-	background-image:				url(../img/github_8D8D8D.png);
+	background-image:				url('${ApplicationContext}/img/github_8D8D8D.png');
 	background-position:			bottom left;
 background-repeat:				no-repeat;
 	background-size:				16px;
@@ -406,11 +406,11 @@ background-repeat:				no-repeat;
 a.logo-git:hover,
 a.logo-git:focus,
 a.logo-git.hover {
-	background-image:				url(../img/github_FFFFFF.png);
+	background-image:				url('${ApplicationContext}/img/github_FFFFFF.png');
 }
 
 .video-link {
-	background-image:				url(../img/ui-icons_2f44ff_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_2f44ff_256x240.png');
 	background-repeat:				no-repeat;
 	padding-left:					18px;
 	width:							0px;
@@ -421,7 +421,7 @@ a.logo-git.hover {
 a:hover > span.video-link,
 a:focus > span.video-link,
 a.hover > span.video-link {
-	background-image:				url(../img/ui-icons_5591fe_256x240.png);
+	background-image:				url('${ApplicationContext}/img/ui-icons_5591fe_256x240.png');
 }
 
 a:hover > .video-link.ui-icon-folder-collapsed,

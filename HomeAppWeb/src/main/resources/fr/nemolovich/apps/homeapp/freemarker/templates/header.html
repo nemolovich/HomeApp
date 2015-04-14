@@ -1,11 +1,11 @@
 
 <link id="favicon" rel="icon" type="image/png" sizes="16x16">
 <link id="favicon2x" rel="icon" type="image/png" sizes="32x32">
-<link type="text/css" rel="stylesheet" href="/css/style.css"/>
-<link type="text/css" rel="stylesheet" href="/css/ui-icons.css"/>
-<link type="text/css" rel="stylesheet" href="/css/themes/black/theme.css"/>
+<link type="text/css" rel="stylesheet" href="${ApplicationContext}/css/style.css"/>
+<link type="text/css" rel="stylesheet" href="${ApplicationContext}/css/ui-icons.css"/>
+<link type="text/css" rel="stylesheet" href="${ApplicationContext}/css/themes/black/theme.css"/>
 <#include "include_ajax.html">
-<script src="/js/messageBox.js" type="text/javascript"></script>
+<script src="${ApplicationContext}/js/messageBox.js" type="text/javascript"></script>
 <!-- Session Loading -->
 <#if Session ??>
 	<#if 0 < Session.messages?size >
