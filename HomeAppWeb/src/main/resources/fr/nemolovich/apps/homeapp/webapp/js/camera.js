@@ -1,24 +1,13 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 function updateSize(json) {
-    var width=json.width;
-    var height=json.height;
-    $('#width_input').val(width);
-    $('#height_input').val(height);
+    var width=json.pi_camera_width;
+    var height=json.pi_camera_height;
+    $('#pi_camera_width_ajax_input').val(width);
+    $('#pi_camera_height_ajax_input').val(height);
     var vlc=$('#vlc_pi_camera');
     vlc.attr('width', width);
     vlc.attr('height', height);
 }
 
 function requestSize() {
-    var width = $('#width_input').val();
-    var height = $('#height_input').val();
-    var req = new Object();
-    req.width = width;
-    req.height = height;
-    request("CameraPage", req);
+    request(bean, fields, updateSize);
 }

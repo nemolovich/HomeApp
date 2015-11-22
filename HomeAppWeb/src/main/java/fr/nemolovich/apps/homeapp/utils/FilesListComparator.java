@@ -14,23 +14,23 @@ import java.util.Comparator;
  */
 public class FilesListComparator implements Comparator<File> {
 
-	@Override
-	public int compare(File f1, File f2) {
+    @Override
+    public int compare(File f1, File f2) {
 
-		int result = 0;
-		if (f1 == null || f2 == null) {
-			result = f1 == null ? f2 == null ? 0 : 1 : -1;
-		} else if (f1.isDirectory()) {
-			result = f2.isDirectory()
-				? f1.getName().toLowerCase()
-				.compareTo(f2.getName().toLowerCase())
-				: -1;
-		} else {
-			result = f2.isDirectory() ? 1 : f1.getName()
-				.toLowerCase().compareTo(
-					f2.getName().toLowerCase());
-		}
-		return result;
-	}
+        int result = 0;
+        if (f1 == null || f2 == null) {
+            result = f1 == null ? f2 == null ? 0 : 1 : -1;
+        } else if (f1.isDirectory()) {
+            result = f2.isDirectory()
+                ? f1.getName().toLowerCase()
+                .compareTo(f2.getName().toLowerCase())
+                : -1;
+        } else {
+            result = f2.isDirectory() ? 1 : f1.getName()
+                .toLowerCase().compareTo(
+                    f2.getName().toLowerCase());
+        }
+        return result;
+    }
 
 }

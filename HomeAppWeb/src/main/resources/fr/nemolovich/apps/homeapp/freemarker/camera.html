@@ -1,16 +1,15 @@
 <#import "templates/master.html" as layout />
 
 <@layout.master title="Raspberry Camera">
-<script src="${ApplicationContext}/js/ajaxRequester.js" type="text/javascript"></script>
 <script src="${ApplicationContext}/js/camera.js" type="text/javascript"></script>
 <!--420x280-->
 
 <form>
-    <input max="1080" min="420" type="number"
-           id="width_input" name="width"
+    <input max="1080" min="280" type="number"
+           id="pi_camera_width_ajax_input" name="width"
            value="${pi_camera_width}" />
-    <input max="720" min="280" type="number"
-           id="height_input" name="height"
+    <input max="1080" min="280" type="number"
+           id="pi_camera_height_ajax_input" name="height"
            value="${pi_camera_height}" />
     <button type="button" class="ui-button"
             onclick="javascript:requestSize();">

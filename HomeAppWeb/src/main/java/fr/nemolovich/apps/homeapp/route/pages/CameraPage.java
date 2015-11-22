@@ -20,9 +20,11 @@ import spark.Response;
 @RouteElement(path = "/camera/:size", page = "camera.html")
 public class CameraPage extends WebRouteServletAdapter {
 
-    private static final String DEFAULT_SERVER = "localhost";
+    private static final String DEFAULT_SERVER = "raspberry";
     private static final int DEFAULT_PORT = 5000;
-    private static final String DEFAULT_PROTOCOL = "rtsp";
+    private static final String DEFAULT_PROTOCOL = "http";
+    private static final int DEFAULT_WIDTH = 800;
+    private static final int DEFAULT_HEIGHT = 800;
 
     private final String cameraServer;
     private final int cameraPort;
@@ -32,11 +34,9 @@ public class CameraPage extends WebRouteServletAdapter {
     private String piCameraWidth;
     @PageField
     private String piCameraHeight;
-    @PageField
+
     private String piCameraProtocol;
-    @PageField
     private String piCameraServer;
-    @PageField
     private String piCameraPort;
 
     private static final Pattern CAMERA_DIMENSION = Pattern
@@ -63,8 +63,8 @@ public class CameraPage extends WebRouteServletAdapter {
             cameraWidth = matcher.group("width");
             cameraHeight = matcher.group("height");
         } else {
-            cameraWidth = "420";
-            cameraHeight = "280";
+            cameraWidth = String.valueOf(DEFAULT_WIDTH);
+            cameraHeight = String.valueOf(DEFAULT_HEIGHT);
         }
         root.put("pi_camera_width", cameraWidth);
         root.put("pi_camera_height", cameraHeight);

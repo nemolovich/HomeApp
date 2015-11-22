@@ -4,20 +4,20 @@ import fr.nemolovich.apps.nemolight.route.file.utils.DeployConfig;
 
 public class HomeAppProperties {
 
-	private static final HomeAppProperties INSTANCE;
+    private static final HomeAppProperties INSTANCE;
 
-	private static final String VIDEO_PATHS = DeployConfig.DEPLOY_FILES_PATH;
+    private static final String VIDEO_PATHS = DeployConfig.DEPLOY_FILES_PATH;
 
-	static {
-		INSTANCE = new HomeAppProperties();
-	}
+    static {
+        INSTANCE = new HomeAppProperties();
+    }
 
-	public static HomeAppProperties getInstance() {
-		return INSTANCE;
-	}
+    public static HomeAppProperties getInstance() {
+        return INSTANCE;
+    }
 
-	private HomeAppProperties() {
+    private HomeAppProperties() {
 
-	}
+    }
 
 }
